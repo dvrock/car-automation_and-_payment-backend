@@ -6,10 +6,6 @@ const mongoErrors = require("mongoose-mongodb-errors");
 const bodyparser = require("body-parser");
 const path = require("path");
 
-var Publishable_Key =
-  "pk_test_51KNEi6LdRkVXjaBCP8mP2KeKINQ1R6klEr6NwgSY7KaMGQAZpK0svLL3Nmjf6NTd4kfrd77za19lHXT3YNBE7Q0300MvzhKvr5";
-var Secret_Key =
-  "sk_test_51KNEi6LdRkVXjaBCtdHurjFFPkquHgNbePxwRuzDlibhGeKpja1ssP9GnuemNJFZiBRC0GClTpPaGblF0Hj4la6S00trVNwyFE";
 const stripe = require("stripe")(Secret_Key);
 
 app.use(bodyparser.urlencoded({ extended: false }));
