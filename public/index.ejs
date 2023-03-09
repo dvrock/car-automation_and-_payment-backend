@@ -1,0 +1,47 @@
+<script src="https://js.stripe.com/v3/"></script>
+<!DOCTYPE html>
+<head>
+  <title>Checkout</title>
+</head>
+<html>
+  <title>Stripe Payment Demo</title>
+  <body>
+    <h3>Welcome to Payment Gateway</h3>
+    <form id="payment-form" method="POST">
+      <div id="payment-element">
+        <label for="card-element"> Card</label>
+        <div id="card-element"></div>
+        <button type="submit">submit</button>
+      </div>
+    </form>
+  </body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", async (e) => {
+    const form = document.getElementById("payment-form");
+    const stripe = Stripe(
+      "pk_test_51KNEi6LdRkVXjaBCP8mP2KeKINQ1R6klEr6NwgSY7KaMGQAZpK0svLL3Nmjf6NTd4kfrd77za19lHXT3YNBE7Q0300MvzhKvr5"
+    );
+    const elements = stripe.elements();
+    const cardElement = elements.create("card");
+    const paymentId = "<%= paymentId %>";
+
+    cardElement.mount("#card-element");
+    var secret = "<%= secret %>";
+    var list = "<%= list %>";
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const paymentIntent = await stripe.confirmCardPayment(secret, {
+        payment_method: {
+          card: cardElement,
+
+          billing_details: {
+            name: "Jenny Rosen",
+          },
+        },
+      });
+    });
+  });
+</script>
